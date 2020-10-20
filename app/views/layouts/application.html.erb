@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BishopTest</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <div class="flash">
+      <% flash.each do |key, value|%>
+        <%= content_tag(:div,value,class:"alert alert-#{key}")%>
+      <% end%>
+    </div>
+    <div class="">
+      <% if user_signed_in? %>
+        <%= link_to "Home", startups_path %>
+        <button type="button" name="button"><%= link_to "logout", destroy_user_session_path, method: :delete %></button>
+      <% else %>
+        <%= link_to "sign up", new_user_registration_path %>
+        <%= link_to "login", new_user_session_path %>
+     <% end %>
+    </div>
+    <%= yield %>
+  </body>
+</html>

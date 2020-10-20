@@ -1,0 +1,24 @@
+<div class="">
+<% if user_signed_in? %>
+  <span> User name : <%= current_user.name %> </span>
+  <span> <button type="button" name="button"><%= link_to 'user parmetter', edit_user_registration_path(:id) %></button></span>
+<% end %>
+</div>
+
+<br><br><br>
+<div class="container startup">
+<% @startups.each do |startup| %>
+<table class="table">
+    <tr>
+      <td><%= image_tag startup.logo.url%></td>
+      <td><%= startup.name %></td>
+      <td><%= startup.address %></td>
+      <td><%= startup.trade_registre %></td>
+      <td><%= startup.resume %></td>
+      <td><%= link_to 'visit', startup %></td>
+
+    </tr>
+</table>
+<% end %>
+</div>
+<button type="action" name="button"><%= link_to 'Post my startup', new_startup_path %></button>

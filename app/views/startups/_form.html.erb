@@ -1,0 +1,49 @@
+<div class="container">
+  <div id="error_explanation">
+      <% if @startup.errors.any? %>
+      <h2>
+        <%= pluralize(@startup.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @startup.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+
+<div class="field">
+  <%= form_with(model:@startup,local: true) do |form| %>
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+      <br>
+      <p>Décrivez votre startup e 150 mots: pensez à parler de l'impact de votre solution.</p>
+
+      <%= form.label :resume %>
+      <%= form.text_area :resume %>
+      <br>
+      <%= form.label :trade_registre %>
+      <%= form.text_area :trade_registre %>
+      <br>
+      <%= form.label :address %>
+      <%= form.text_area :address %>
+      <br>
+      <%= form.label :logo %>
+      <%= form.file_field :logo %>
+      <%= form.hidden_field :logo_cache %>
+      <br>
+      <p>C'est toujours plus impactant de présenter votre entreprise en la mettant en scène dans une vidéo.</p>
+      <%= form.label :description %>
+      <%= form.file_field :descrption %>
+      <%= form.hidden_field :descrption_cache %>
+      <br>
+      <%= form.label :banner %>
+      <%= form.file_field :banner %>
+      <%= form.hidden_field :banner_cache %>
+      <br>
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+  <% end %>
+</div>

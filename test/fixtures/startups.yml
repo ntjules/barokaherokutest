@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  resume: MyText
+  descrption: MyText
+  trade_registre: 1
+  banner: MyText
+  logo: MyText
+  address: MyString
+
+two:
+  name: MyString
+  resume: MyText
+  descrption: MyText
+  trade_registre: 1
+  banner: MyText
+  logo: MyText
+  address: MyString
