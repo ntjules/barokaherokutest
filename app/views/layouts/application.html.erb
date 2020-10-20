@@ -19,6 +19,7 @@
         <%= link_to "Home", startups_path %>
         <button type="button" name="button"><%= link_to "logout", destroy_user_session_path, method: :delete %></button>
       <% else %>
+        <%= link_to "Home", startups_path %>
         <%= link_to "sign up", new_user_registration_path %>
         <%= link_to "login", new_user_session_path %>
      <% end %>

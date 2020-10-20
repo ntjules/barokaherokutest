@@ -1,6 +1,8 @@
 class StartupsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
   before_action :set_startup, only: [:show, :edit, :update, :destroy]
+  before_action :login_check, only: [:new, :edit, :destroy]
+  before_action :user_check, only: [:edit, :destroy]
   def index
     @startups = Startup.all
   end
@@ -9,6 +11,7 @@ class StartupsController < ApplicationController
   end
   def create
     @startup = Startup.new(startup_params)
+    @startup.user_id = current_user.id
     if @startup.save
       ContactMailer.contact_mail(@startup).deliver
       flash[:success] = 'startup successfully create'
@@ -31,6 +34,7 @@ def update
 end
 def destroy
   @startup.destroy
+  DeleteMailer.delete_mail(@startup).deliver
   flash[:success] = 'startup successfully destroy !'
   redirect_to startups_path
 end
@@ -45,5 +49,11 @@ private
   end
   def set_startup
     @startup = Startup.find(params[:id])
+  end
+  def user_check
+    redirect_to startups_path, notice:('access deny') unless current_user == @startup.user_id
+  end
+  def login_check
+    redirect_to new_user_registration_path, notice:('you are not login, please login or create new accompt') unless user_signed_in?
   end
 end
