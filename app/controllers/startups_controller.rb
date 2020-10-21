@@ -1,10 +1,13 @@
 class StartupsController < ApplicationController
+  require 'youtube_it'
   before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
   before_action :set_startup, only: [:show, :edit, :update, :destroy]
   before_action :login_check, only: [:new, :edit, :destroy]
   before_action :user_check, only: [:edit, :destroy]
+
   def index
     @startups = Startup.all
+    @user = User.all
   end
   def new
     @startup = Startup.new
@@ -40,8 +43,8 @@ def destroy
 end
 private
   def startup_params
-    params.require(:startup).permit(:name,:resume,
-                                    :descrption,:descrption_cache,
+    params.require(:startup).permit(:name,:resume,:contact,
+                                    :decription_video,:decription_video_cache,
                                     :trade_registre,
                                     :address,
                                     :banner,:banner_cache,
@@ -51,7 +54,7 @@ private
     @startup = Startup.find(params[:id])
   end
   def user_check
-    redirect_to startups_path, notice:('access deny') unless current_user == @startup.user_id
+    redirect_to startups_path, notice:('access deny') unless current_user.id == @startup.user_id
   end
   def login_check
     redirect_to new_user_registration_path, notice:('you are not login, please login or create new accompt') unless user_signed_in?

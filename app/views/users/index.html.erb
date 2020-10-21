@@ -1,0 +1,20 @@
+<h2>All User</h2>
+<div class="">
+    <% @users.each do |user| %>
+  <p>
+      <span> <%= image_tag (user.avatar_thumbnail), style: 'height:50px;width:50px;'%> </span>
+      <span> <%= user.name %> </span>
+      <button type="button" name="button"> <%= link_to "show_profile", user %></button><br>
+      <span> <%= user.email %> </span><br>
+       <% user.startups.each do |startup| %>
+           <span><%= image_tag startup.logo.url,style: 'height:10%;width:10%;'%></span>
+           <span><%= link_to "#{startup.name}",startup  %></span><br>
+       <% end %>
+  </p>
+  <% if user_signed_in?%>
+     <% unless current_user.id == user.id  %>
+           <%= render 'follow_form', user: user %>
+     <% end %>
+  <% end %>
+<% end %>
+</div>

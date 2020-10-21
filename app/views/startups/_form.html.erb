@@ -23,20 +23,25 @@
       <%= form.label :resume %>
       <%= form.text_area :resume %>
       <br>
+      <%= form.label :contact %>
+      <%= form.text_field :contact %>
+      <br>
       <%= form.label :trade_registre %>
-      <%= form.text_area :trade_registre %>
+      <%= form.text_field :trade_registre %>
       <br>
       <%= form.label :address %>
-      <%= form.text_area :address %>
+      <%= form.text_field :address %>
       <br>
       <%= form.label :logo %>
       <%= form.file_field :logo %>
       <%= form.hidden_field :logo_cache %>
       <br>
-      <p>C'est toujours plus impactant de présenter votre entreprise en la mettant en scène dans une vidéo.</p>
-      <%= form.label :description %>
-      <%= form.file_field :descrption %>
-      <%= form.hidden_field :descrption_cache %>
+      <p>C'est toujours plus impactant de présenter votre entreprise en la mettant en scène dans une vidéo.<br>
+      vous pouvez ajoutez votre vidéo sur youtube et copié - coller lien ici</p>
+      <%= form.label :description_video %>
+      <%= form.file_field :decription_video %>
+      <%= form.hidden_field :decription_video_cache %>
+
       <br>
       <%= form.label :banner %>
       <%= form.file_field :banner %>

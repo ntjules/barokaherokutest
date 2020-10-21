@@ -1,7 +1,7 @@
 class Startup < ApplicationRecord
 
   mount_uploader :logo, LogoUploader
-  mount_uploader :descrption, DecriptionUploader
+  mount_uploader :decription_video, DecriptionUploader
   mount_uploader :banner, BannerUploader
 
   validates :address, presence:true, null:false
@@ -10,5 +10,4 @@ class Startup < ApplicationRecord
   validates :resume, presence:true, null:false
 
   belongs_to :user
-
 end

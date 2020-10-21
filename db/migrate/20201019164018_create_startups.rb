@@ -3,7 +3,8 @@ class CreateStartups < ActiveRecord::Migration[6.0]
     create_table :startups do |t|
       t.string :name
       t.text :resume
-      t.text :descrption
+      t.text :contact
+      t.text :decription_video
       t.integer :trade_registre
       t.text :banner
       t.text :logo

@@ -4,8 +4,19 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
+    <%if resource.avatar.attached?%>
+      <%=image_tag(resource.avatar)  %>
+    <% else %>
+      <%=image_tag("/default-avatar.jpg") %>
+    <% end %>
+  </div>
+  <div class="field">
+      <%= f.file_field :avatar, autofocus: true, autocomplete: "avatar" %>
+  </div>
+
+  <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "email" %>
+    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
   </div>
   <div class="field">
     <%= f.label :email %><br />
@@ -30,4 +41,4 @@
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<p> <%= render "devise/shared/links" %> </p>

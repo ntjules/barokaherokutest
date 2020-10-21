@@ -1,0 +1,22 @@
+<span> <%= image_tag (@user.avatar_thumbnail), style: 'height:150px;width:150px;'%> </span>
+<% @user.startups.each do |startup| %>
+  <p>
+    <h3> User détails</h3>
+    <%= @user.name %><br>
+    <%= @user.email %> <br>
+    <% if user_signed_in? %>
+       <% unless current_user.id == startup.user_id  %>
+          <p><%= render 'follow_form', user: @user %></p>
+       <% end %>
+    <% end %>
+    <h3> Visitez ma startup</h3>
+        <span><%= image_tag startup.logo.url,style: 'height:10%;width:10%;'%></span>
+        <span><%= startup.name %></span><br>
+        <span><%= link_to "visiter",startup %></span><br>
+        <ol>
+           <li>Vous pouvez m'encourager en laissant un commentaire positif sur la page de ma startup.</li>
+            <li>Vous pouvez également promouvoir ma startup en cliquant sur le bouton promouvoir. </li>
+        </ol>
+
+
+<% end %>

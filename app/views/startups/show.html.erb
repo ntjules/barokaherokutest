@@ -1,14 +1,29 @@
-<p><%= image_tag @startup.logo.url %></p>
-<div class="jumbotron text-center">
-  <h1><%= @startup.name %></h1>
-  <p><%= @startup.resume %></p>
-</div>
 <div class="">
-   <p><strong> adresse</strong> : <%= @startup.address %></p>
-   <p><strong> IFU</strong> <%= @startup.trade_registre %></p>
-   <p><strong> description </strong> : <video controls width="100%" height="360px" src="<%= @startup.descrption %>"></video></p>
+  <p><image controls width="100%" height="auto" src="<%= @startup.banner %>"></image></p>
 </div>
-<% if user_signed_in? %>
+
+<div class="jumbotron text-center">
+  <p><%= image_tag @startup.logo.url,style: 'height:20%;width:20%;'%></p>
+
+  <h1><%= @startup.name %></h1>
+
+  <p><strong> Contact </strong> : <%= @startup.contact %></p>
+  <p><strong> Adresse</strong> : <%= @startup.address %></p>
+  <p><strong> IFU</strong> <%= @startup.trade_registre %></p>
+  <span><strong>Owerner</strong> : <%= @startup.user.name %></span>
+  <span> / <%= @startup.user.email %></span>
+
+  <span><button type="button" name="button"> <%= link_to "Owner profile", user_path(@startup.user.id) %></button></span>
+
+  <div class="">
+     <p><%= @startup.resume %></p>
+  </div>
+</div>
+
+<div class="">
+   <p><strong> description video </strong> :<video controls width="100%" height="360px" src="<%= @startup.decription_video %>"</video></p>
+</div>
+<% if user_signed_in? && current_user.id == @startup.user_id %>
 <div class="action">
   <button type="action" name="button"><%= link_to 'edit Statut', edit_startup_path(@startup.id) %></button>
   <button type="action" name="button"><%= link_to 'Delete Startup', startup_path(@startup.id), method: :delete, data: { confirm: 'Are you sure?' } %></button>
