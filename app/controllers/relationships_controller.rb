@@ -1,4 +1,9 @@
 class RelationshipsController < ApplicationController
+  def show
+    @user = User.find(params[:id])
+    @followers = @user.followers
+    @following = @user.following
+  end
   # If you are using Devise, use the following instead of if logged_in?
   # before_action :authenticate_undefined!
   respond_to? :js # If you want to return all the responses to existing actions in js, you can use this description.

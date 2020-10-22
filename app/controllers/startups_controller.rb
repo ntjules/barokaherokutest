@@ -13,17 +13,19 @@ class StartupsController < ApplicationController
     @startup = Startup.new
   end
   def create
-    @startup = Startup.new(startup_params)
-    @startup.user_id = current_user.id
+    #@startup = Startup.new(startup_params)
+    #@startup.user_id = current_user.id
+    @startup = current_user.startups.build(startup_params)
     if @startup.save
       ContactMailer.contact_mail(@startup).deliver
       flash[:success] = 'startup successfully create'
-      redirect_to startups_path
+      redirect_to user_path(current_user.id)
     else
       render :new
   end
 end
 def show
+  @favorite = @startup.favorites.find_by(startup_id: @startup.id)
 end
 def edit
 end

@@ -15,13 +15,12 @@
       <% end%>
     </div>
     <div class="">
-      <% if user_signed_in? %>
         <%= link_to "Home", startups_path %>
         <%= link_to 'All User', users_path%>
-
+      <% if user_signed_in? %>
+       <button type="button" name="button"> <%= link_to "My_profile", user_path(current_user.id) %></button>
         <button type="button" name="button"><%= link_to "logout", destroy_user_session_path, method: :delete %></button>
       <% else %>
-        <%= link_to "Home", startups_path %>
         <%= link_to "sign up", new_user_registration_path %>
         <%= link_to "login", new_user_session_path %>
      <% end %>

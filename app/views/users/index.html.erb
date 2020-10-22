@@ -1,20 +1,29 @@
 <h2>All User</h2>
-<div class="">
+<div class="jumbotron">
     <% @users.each do |user| %>
   <p>
-      <span> <%= image_tag (user.avatar_thumbnail), style: 'height:50px;width:50px;'%> </span>
-      <span> <%= user.name %> </span>
+      <span> <%= image_tag (user.avatar_thumbnail), style: 'height:30px;width:30px;'%> </span>
+      <strong><%= user.name %></strong><br>
       <button type="button" name="button"> <%= link_to "show_profile", user %></button><br>
       <span> <%= user.email %> </span><br>
-       <% user.startups.each do |startup| %>
-           <span><%= image_tag startup.logo.url,style: 'height:10%;width:10%;'%></span>
-           <span><%= link_to "#{startup.name}",startup  %></span><br>
-       <% end %>
+      <ul>
+        <span> RESEAU de <%= user.name %></span>
+        <li><strong><%= user.followers.count %> partenaires(s)</strong></li>
+        <li><strong><%= user.following.count %> startup(s) affilié(s)</strong>:</li>
+        <% if user_signed_in?%>
+          <% unless current_user.id == user.id  %>
+              <li> <%= render 'follow_form', user: user %></li>
+            <% end %>
+          <% end %>
+      </ul>
+      <ul>
+         <% user.startups.each do |startup| %>
+            <span> STARTUP PUBLIE :</span>
+             <li> <span><%= image_tag startup.logo.url,style: 'height:10%;width:10%;'%></span>
+             <span><%= link_to "#{startup.name}",startup  %></span></li>
+         <% end %>
+      </ul>
+
   </p>
-  <% if user_signed_in?%>
-     <% unless current_user.id == user.id  %>
-           <%= render 'follow_form', user: user %>
-     <% end %>
-  <% end %>
-<% end %>
+    <% end %>
 </div>

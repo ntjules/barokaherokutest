@@ -1,5 +1,4 @@
 class Startup < ApplicationRecord
-
   mount_uploader :logo, LogoUploader
   mount_uploader :decription_video, DecriptionUploader
   mount_uploader :banner, BannerUploader
@@ -10,4 +9,6 @@ class Startup < ApplicationRecord
   validates :resume, presence:true, null:false
 
   belongs_to :user
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_users, through: :favorites, source: :user
 end

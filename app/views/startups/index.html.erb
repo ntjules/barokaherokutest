@@ -2,7 +2,6 @@
 <% if user_signed_in? %>
   <span> <%= image_tag (current_user.avatar_thumbnail), style: 'height:50px;width:50px;'%> </span>
   <span> <%= link_to "#{current_user.name}", user_path(current_user.id) %> </span>
-  <span> <button type="button" name="button"><%= link_to 'user parmetter', edit_user_registration_path(:id) %></button></span>
 <% end %>
 </div>
 
@@ -16,10 +15,10 @@
       <td><%= startup.address %></td>
       <td><%= startup.trade_registre %></td>
       <td><%= startup.contact %></td>
+      <td><strong> <%=startup.favorites.count %></strong> <img src="/etoile.png" alt="contributeur (s)" width="25" height="25"></td>
       <td><%= link_to 'visit', startup %></td>
 
     </tr>
 </table>
 <% end %>
 </div>
-<button type="action" name="button"><%= link_to 'Post my startup', new_startup_path %></button>

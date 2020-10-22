@@ -1,0 +1,19 @@
+<h1>RESEAUX DE <%=@user.name %></h1>
+
+<strong>STARTUPS AFFILIES</<strong>
+<ul>
+  <% @user.following.each do |following| %>
+      <li><%= image_tag following.avatar_thumbnail,style: 'height:30px;width:30px;' %>
+        <strong><%= link_to "#{following.name}", user_path(following.id) %></strong>
+      </li>
+  <% end %>
+</ul>
+<br>
+<strong>PARTENAIRES</<strong>
+<ul>
+  <% @user.followers.each do |followers| %>
+      <li><%= image_tag followers.avatar_thumbnail,style: 'height:30px;width:30px;' %>
+        <strong><%= link_to "#{followers.name}", user_path(followers.id) %></strong>
+      </li>
+    <% end %>
+</ul>

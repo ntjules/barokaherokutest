@@ -1,25 +1,32 @@
 <div class="">
   <p><image controls width="100%" height="auto" src="<%= @startup.banner %>"></image></p>
 </div>
-
 <div class="jumbotron text-center">
   <p><%= image_tag @startup.logo.url,style: 'height:20%;width:20%;'%></p>
-
   <h1><%= @startup.name %></h1>
-
+  <div class="favorite">
+    <span><img src="/etoile.png" alt="contributeur (s)" width="25" height="25">( <%=@startup.favorites.count %> )</span>
+    <br>
+    <% if user_signed_in? %>
+      <% unless @startup.user_id == current_user.id %>
+          <% if @favorite.present? %>
+            <span> <em> --Vous êtes déjà contributeur de cette startup --</em></span>
+          <% else %>
+            <button type="button" name="button"> <%= link_to 'CONTRIBUER', favorites_path(startup_id: @startup.id)%></button>
+          <% end %>
+      <% end %>
+  <% end %>
+  </div>
   <p><strong> Contact </strong> : <%= @startup.contact %></p>
-  <p><strong> Adresse</strong> : <%= @startup.address %></p>
-  <p><strong> IFU</strong> <%= @startup.trade_registre %></p>
+  <p><strong> Adresse </strong> : <%= @startup.address %></p>
+  <p><strong> IFU </strong> : <%= @startup.trade_registre %></p>
   <span><strong>Owerner</strong> : <%= @startup.user.name %></span>
   <span> / <%= @startup.user.email %></span>
-
   <span><button type="button" name="button"> <%= link_to "Owner profile", user_path(@startup.user.id) %></button></span>
-
   <div class="">
      <p><%= @startup.resume %></p>
   </div>
 </div>
-
 <div class="">
    <p><strong> description video </strong> :<video controls width="100%" height="360px" src="<%= @startup.decription_video %>"</video></p>
 </div>

@@ -1,9 +1,12 @@
 <span> <%= image_tag (@user.avatar_thumbnail), style: 'height:150px;width:150px;'%> </span>
+<p>
+  <%= @user.name %><br>
+  <%= @user.email %> <br>
+  <% if user_signed_in? %>
+    <button type="button" name="button"><%= link_to 'user parmetter', edit_user_registration_path(:id) %></button>
+  <% end %>
+</p>
 <% @user.startups.each do |startup| %>
-  <p>
-    <h3> User détails</h3>
-    <%= @user.name %><br>
-    <%= @user.email %> <br>
     <% if user_signed_in? %>
        <% unless current_user.id == startup.user_id  %>
           <p><%= render 'follow_form', user: @user %></p>
@@ -11,12 +14,27 @@
     <% end %>
     <h3> Visitez ma startup</h3>
         <span><%= image_tag startup.logo.url,style: 'height:10%;width:10%;'%></span>
-        <span><%= startup.name %></span><br>
-        <span><%= link_to "visiter",startup %></span><br>
+        <span><%= link_to "visiter  #{startup.name}",startup %></span>
+        <span>(<%= startup.favorites.count %> <em> contributeurs</em>)</span><br>
         <ol>
+           <% unless user_signed_in? %>
+           <li>
+                  <%= link_to "Inscrivez-vous", new_user_registration_path %> ou
+                  <%= link_to "connectez-vous", new_user_session_path %>
+                <% end %>
+            </li>
            <li>Vous pouvez m'encourager en laissant un commentaire positif sur la page de ma startup.</li>
-            <li>Vous pouvez également promouvoir ma startup en cliquant sur le bouton promouvoir. </li>
+           <li>Vous pouvez également contribuer à promouvoir ma startup en cliquant sur le bouton promouvoir. </li>
         </ol>
-
-
 <% end %>
+<div class="jumbotron">
+  <strong><%= link_to "MON RESEAU",relationship_path(@user.id) %></strong>
+  <ul>
+    <li><strong> <%=@user.followers.count %> startup (s) affilié(s)</strong>:</li>
+    <li><strong> <%= @user.following.count %> partenaires (s)</strong>:</li>
+  </ul>
+</div>
+<br>
+<div class="">
+    <button type="button" name="button"><%= link_to 'add startup', new_startup_path %></button>
+</div>
