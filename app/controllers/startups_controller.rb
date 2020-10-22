@@ -25,6 +25,8 @@ class StartupsController < ApplicationController
   end
 end
 def show
+  @comments = @startup.comments
+  @comment = @startup.comments.build
   @favorite = @startup.favorites.find_by(startup_id: @startup.id)
 end
 def edit

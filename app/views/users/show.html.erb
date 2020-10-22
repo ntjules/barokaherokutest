@@ -15,7 +15,7 @@
     <h3> Visitez ma startup</h3>
         <span><%= image_tag startup.logo.url,style: 'height:10%;width:10%;'%></span>
         <span><%= link_to "visiter  #{startup.name}",startup %></span>
-        <span>(<%= startup.favorites.count %> <em> contributeurs</em>)</span><br>
+        <span>(<%= startup.favorites.count %>) <img src="/etoile.png" alt="contributeur (s)" width="25" height="25"><br>
         <ol>
            <% unless user_signed_in? %>
            <li>

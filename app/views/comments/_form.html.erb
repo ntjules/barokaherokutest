@@ -1,0 +1,19 @@
+<%= form_with(model: [@startup, comment]) do |form| %>
+  <% if comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(comment.errors.count, "error") %>undefined</h2>
+      <ul>
+      <% comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <p>Commentaire</p>
+    <%= form.text_area :content %>
+  </div>
+  <div class="actions">
+    <%= form.submit 'poster un commentaire' %>
+  </div>
+<% end %>

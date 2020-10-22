@@ -7,7 +7,8 @@ class User < ApplicationRecord
   has_one_attached :avatar
   #startup connexion
   has_many :startups,dependent: :destroy
-
+  #comments function
+  has_many :comments,dependent: :destroy
   #promote function
   has_many :favorites, dependent: :destroy
   #relationship function

@@ -1,0 +1,18 @@
+<ul>
+  <% comments.each do |comment| %>
+    <% if comment.id.present? %>
+      <li>
+        <div class="comment-content" id ="this_comment_<%= comment.id %>"></div>
+        <strong><%= image_tag comment.user.avatar_thumbnail,style: 'height:5%;width:5%;'%><%= comment.user.name %></strong><br>
+        <p> << <%= comment.content %> >> <p>
+        <% if user_signed_in? %>
+            <% if comment.user_id == current_user.id %>
+              <span><%= link_to "modifier", edit_startup_comment_path(@startup, comment), remote: true %></span>
+              <span><%= link_to "supprimer", startup_comment_path(comment.startup.id, comment.id), method: :delete, remote: true,
+                                        data: { confirm: "Do you really want to delete this????"} %></span>
+            <% end %>
+        <% end %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

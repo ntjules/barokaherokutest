@@ -10,9 +10,9 @@
     <% if user_signed_in? %>
       <% unless @startup.user_id == current_user.id %>
           <% if @favorite.present? %>
-            <span> <em> --Vous êtes déjà contributeur de cette startup --</em></span>
+            <span> <em> --Vous avez déjà promu de cette startup --</em></span>
           <% else %>
-            <button type="button" name="button"> <%= link_to 'CONTRIBUER', favorites_path(startup_id: @startup.id)%></button>
+            <button type="button" name="button"> <%= link_to 'PROMOUVOIR', favorites_path(startup_id: @startup.id)%></button>
           <% end %>
       <% end %>
   <% end %>
@@ -30,6 +30,11 @@
 <div class="">
    <p><strong> description video </strong> :<video controls width="100%" height="360px" src="<%= @startup.decription_video %>"</video></p>
 </div>
+
+  <div id="comments_area">
+    <%= render partial: 'comments/index', locals: { comments: @comments, startup: @startup } %>
+  </div>
+    <%= render partial: 'comments/form', locals: { comment: @comment, startup: @startup } %>
 <% if user_signed_in? && current_user.id == @startup.user_id %>
 <div class="action">
   <button type="action" name="button"><%= link_to 'edit Statut', edit_startup_path(@startup.id) %></button>
