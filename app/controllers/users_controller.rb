@@ -4,9 +4,11 @@ class UsersController < ApplicationController
   def index
   end
   def show
+    @message = Message.all
+    @cenversation = Conversation.all
    @user = User.find(params[:id])
   end
-  
+
   private
   def set_user
     @startup = Startup.all

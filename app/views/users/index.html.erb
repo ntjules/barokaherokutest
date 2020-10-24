@@ -1,4 +1,5 @@
 <h2>All User</h2>
+
 <div class="jumbotron">
     <% @users.each do |user| %>
   <p>
@@ -8,7 +9,6 @@
       <span> <%= user.email %> </span><br>
       <ul>
         <span> RESEAU de <%= user.name %></span>
-        <li><strong><%= user.followers.count %> partenaires(s)</strong></li>
         <li><strong><%= user.following.count %> startup(s) affilié(s)</strong>:</li>
         <% if user_signed_in?%>
           <% unless current_user.id == user.id  %>
@@ -23,7 +23,10 @@
              <span><%= link_to "#{startup.name}",startup  %></span></li>
          <% end %>
       </ul>
-
-  </p>
+      <% if user_signed_in?%>
+        <button type="button" name="button"><%= link_to "Envoyer un message à #{user.name}", conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post %>
+      <% end %>
+      </button>
+     </p>
     <% end %>
 </div>

@@ -2,10 +2,15 @@
 <p>
   <%= @user.name %><br>
   <%= @user.email %> <br>
+
+
   <% if user_signed_in? %>
-    <button type="button" name="button"><%= link_to 'user parmetter', edit_user_registration_path(:id) %></button>
-  <% end %>
-</p>
+    <% if current_user.id == @user.id  %>
+        <button type="button" name="button"><%= link_to 'user parmetter', edit_user_registration_path(:id) %></button>
+          <h3><%= link_to "BOITES DE MESSAGES",conversations_path %></h3>
+    <% end %>
+ <% end %>
+
 <% @user.startups.each do |startup| %>
     <% if user_signed_in? %>
        <% unless current_user.id == startup.user_id  %>
@@ -17,11 +22,11 @@
         <span><%= link_to "visiter  #{startup.name}",startup %></span>
         <span>(<%= startup.favorites.count %>) <img src="/etoile.png" alt="contributeur (s)" width="25" height="25"><br>
         <ol>
-           <% unless user_signed_in? %>
+       <% unless user_signed_in? %>
            <li>
-                  <%= link_to "Inscrivez-vous", new_user_registration_path %> ou
-                  <%= link_to "connectez-vous", new_user_session_path %>
-                <% end %>
+          <%= link_to "Inscrivez-vous", new_user_registration_path %> ou
+          <%= link_to "connectez-vous", new_user_session_path %>
+      <% end %>
             </li>
            <li>Vous pouvez m'encourager en laissant un commentaire positif sur la page de ma startup.</li>
            <li>Vous pouvez également contribuer à promouvoir ma startup en cliquant sur le bouton promouvoir. </li>
@@ -30,8 +35,7 @@
 <div class="jumbotron">
   <strong><%= link_to "MON RESEAU",relationship_path(@user.id) %></strong>
   <ul>
-    <li><strong> <%=@user.followers.count %> startup (s) affilié(s)</strong>:</li>
-    <li><strong> <%= @user.following.count %> partenaires (s)</strong>:</li>
+    <li><strong> <%= @user.following.count %> startup (s) affilié(s)</strong>:</li>
   </ul>
 </div>
 <br>

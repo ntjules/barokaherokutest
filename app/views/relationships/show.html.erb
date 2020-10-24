@@ -8,12 +8,3 @@
       </li>
   <% end %>
 </ul>
-<br>
-<strong>PARTENAIRES</<strong>
-<ul>
-  <% @user.followers.each do |followers| %>
-      <li><%= image_tag followers.avatar_thumbnail,style: 'height:30px;width:30px;' %>
-        <strong><%= link_to "#{followers.name}", user_path(followers.id) %></strong>
-      </li>
-    <% end %>
-</ul>

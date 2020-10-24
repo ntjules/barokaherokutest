@@ -2,9 +2,9 @@
   <% unless current_user.following?(user) %>
       <%= form_with(model: current_user.active_relationships.build(followed_id: user.id))  do |f| %>
         <%= f.hidden_field :followed_id %>
-        <%= f.submit "Devenir partenaire" %>
+        <%= f.submit "Ajouter à mon réseau" %>
       <% end %>
   <% else %>
-      <em> Vous êtes partenaire de cette startup !</em>
+      <em> Appartient à votre réseau </em>
   <% end %>
 </span>

@@ -5,14 +5,14 @@
   <p><%= image_tag @startup.logo.url,style: 'height:20%;width:20%;'%></p>
   <h1><%= @startup.name %></h1>
   <div class="favorite">
-    <span><img src="/etoile.png" alt="contributeur (s)" width="25" height="25">( <%=@startup.favorites.count %> )</span>
+    <span><%=@startup.favorites.count %> <span> </span> <img src="/etoile.png" alt="contributeur (s)" width="25" height="25"></span>
     <br>
     <% if user_signed_in? %>
       <% unless @startup.user_id == current_user.id %>
           <% if @favorite.present? %>
-            <span> <em> --Vous avez déjà promu de cette startup --</em></span>
+            <span> <em> --Vous avez promu de cette startup --</em></span>
           <% else %>
-            <button type="button" name="button"> <%= link_to 'PROMOUVOIR', favorites_path(startup_id: @startup.id)%></button>
+            <button type="button" name="button"> <%= link_to 'PROMOUVOIR', favorites_path(startup_id: @startup.id), method: :post%></button>
           <% end %>
       <% end %>
   <% end %>
@@ -26,6 +26,12 @@
   <div class="">
      <p><%= @startup.resume %></p>
   </div>
+  <% if user_signed_in? && current_user.id == @startup.user_id %>
+  <div class="action">
+    <button type="action" name="button"><%= link_to 'edit Statut', edit_startup_path(@startup.id) %></button>
+    <button type="action" name="button"><%= link_to 'Delete Startup', startup_path(@startup.id), method: :delete, data: { confirm: 'Are you sure?' } %></button>
+  </div>
+  <% end %>
 </div>
 <div class="">
    <p><strong> description video </strong> :<video controls width="100%" height="360px" src="<%= @startup.decription_video %>"</video></p>
@@ -35,9 +41,3 @@
     <%= render partial: 'comments/index', locals: { comments: @comments, startup: @startup } %>
   </div>
     <%= render partial: 'comments/form', locals: { comment: @comment, startup: @startup } %>
-<% if user_signed_in? && current_user.id == @startup.user_id %>
-<div class="action">
-  <button type="action" name="button"><%= link_to 'edit Statut', edit_startup_path(@startup.id) %></button>
-  <button type="action" name="button"><%= link_to 'Delete Startup', startup_path(@startup.id), method: :delete, data: { confirm: 'Are you sure?' } %></button>
-</div>
-<% end %>
