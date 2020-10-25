@@ -1,0 +1,11 @@
+<div id ="favorite">
+  <% if user_signed_in? %>
+    <% unless @startup.user_id == current_user.id %>
+        <% if @favorite.present? %>
+          <small class="badge badge-success"> <em> You promoted this startup  </em></small>
+        <% else %>
+          <button type="button" name="button"> <%= link_to 'PROMOUVOIR', favorites_path(startup_id: @startup.id), method: :post%></button>
+        <% end %>
+    <% end %>
+  <% end %>
+</div>

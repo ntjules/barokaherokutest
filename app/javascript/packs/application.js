@@ -3,6 +3,13 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
+
+//= require jquery/dist/jquery.js
+//= require turbolinks
+//= require_tree
+
+
+import 'bootstrap'
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
@@ -15,3 +22,28 @@ require('jquery')
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+
+$(document).ready(function() {
+	// jQuery code
+
+	///////////////// fixed menu on scroll for desctop
+    if ($(window).width() > 780) {
+
+        var navbar_height =  $('.menu').outerHeight();
+
+        $(window).scroll(function(){
+            if ($(this).scrollTop() > 0) {
+				 $('.menu').css('height', navbar_height + 'px');
+                 $('#menu').addClass("fixed-top");
+
+            }else{
+                $('#menu').removeClass("fixed-top");
+                $('.menu').css('height', 'auto');
+            }
+        });
+    } // end if
+    setTimeout(function() {
+    $('.flash').fadeOut('fast');
+}, 3000);
+});

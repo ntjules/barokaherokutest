@@ -1,12 +1,20 @@
-<h2>Log in</h2>
+
+<div class="offset-3 col-sm-6">
+  <div class="text-center">
+    <h2> SIGN UP</h2>
+    Good to see you again. Find your network where you left it,
+    and keep it growing.Bishop is there to help you develop your startup's network..
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
+  <div id="login" class="fadeIn first" name="login" placeholder="name">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.text_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
-  <div class="field">
+  <div id="login" class="fadeIn first" name="login" placeholder="name">
     <%= f.label :password %><br />
     <%= f.password_field :password, autocomplete: "current-password" %>
   </div>
@@ -17,9 +25,11 @@
       <%= f.label :remember_me %>
     </div>
   <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
+<br>
+  <div class="fadeIn fourth" value="Log In">
+    <%= f.submit "Log in", class:"btn btn-sm btn-info"%>
   </div>
 <% end %>
-<p> <%= render "devise/shared/links" %> </p>
+<div id="formFooter">
+  <%= render "devise/shared/links" %>
+</div>

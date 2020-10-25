@@ -26,7 +26,7 @@ class StartupsController < ApplicationController
   end
 end
 def show
-  @favorite = current_user.favorites.find_by(startup_id: @startup.id)
+  @favorite = @startup.favorites.find_by(startup_id: @startup.id)
   @comments = @startup.comments
   @comment = @startup.comments.build
 end

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: "/inbox" if Rails.env.development?
 
   root 'startups#index'
+  #root 'home#home'
 
   resources :startups do
     resources :comments
@@ -20,5 +21,6 @@ Rails.application.routes.draw do
   resources :conversations do
     resources :messages
   end
+
 
 end

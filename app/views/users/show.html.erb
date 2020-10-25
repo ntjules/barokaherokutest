@@ -1,44 +1,83 @@
-<span> <%= image_tag (@user.avatar_thumbnail), style: 'height:150px;width:150px;'%> </span>
-<p>
-  <%= @user.name %><br>
-  <%= @user.email %> <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card mb-12 shadow-sm">
+          <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-12 justify-content-sd-center ">
+              <div class="container">
+                <p>
+                  <%= image_tag (@user.avatar_thumbnail), style: 'height:150px;width:150px;'%>
+                <p>
+                <p><strong>Name </strong>:<%= @user.name %></p>
+                <p><strong>Email </strong><%= @user.email %></p>
+                <% if user_signed_in? %>
+                  <% if current_user.id == @user.id  %>
+                      <%= link_to 'user parmetter', edit_user_registration_path(:id),class:"btn btn-sm btn-warning" %>
+                  <% end %>
+               <% end %>
+              <br>
+              </div>
+            </div>
+              <div class="col-lg-9 col-md-8 col-sm-12 justify-content-sd-center">
+                <div class="container-fluid">
+                  <div class="">
+                    <% if @user.startups.empty? %>
+                    <p>Hi Champion, if you have a startup in creation, even if it's just an idea,
+                       we encourage you to post it and build a network. <br>
+                      <strong>With a good network you can turn a simple idea into a great business.</strong></p>
+                      <hr>
+                      <small>This user don't post startup</small>
+                      <% if user_signed_in? %>
+                        <% if current_user.id == @user.id  %>
+                          <%= link_to 'add startup', new_startup_path,class:"btn btn-sm btn-info" %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                  <% @user.startups.each do |startup| %>
+                    <% if user_signed_in? %>
+                       <% unless current_user.id == startup.user_id  %>
+                          <p><%= render 'follow_form', user: @user %></p>
+                       <% end %>
+                    <% end %>
+                    <p><%= image_tag startup.logo.url,style: 'height:30%;width:30%;'%>
+                    <span><%= link_to "#{startup.name}",startup %></span>
+                    <span>(<%= startup.favorites.count %>) <img src="/etoile.png" alt="contributeur (s)" width="25" height="25"><br>
+                    </p>
+                    <table class="table">
+                      <thead>
+                          <tr>
+                            <th scope="col">startup name</th>
+                            <th scope="col">adress</th>
+                            <th scope="col">contact</th>
+                            <th scope="col">trade registre</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><%=startup.name %></td>
+                            <td><%=startup.address %></td>
+                            <td><%=startup.contact %></td>
+                            <td><%=startup.trade_registre %></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <ul>
+                       <% unless user_signed_in? %>
+                           <li>
+                          <%= link_to "Inscrivez-vous", new_user_registration_path %> ou
+                          <%= link_to "connectez-vous", new_user_session_path %>
+                      <% end %>
+                            </li>
+                           <li>Vous pouvez m'encourager en laissant un commentaire positif sur la page de ma startup.</li>
+                           <li>Vous pouvez également contribuer à promouvoir ma startup en cliquant sur le bouton promouvoir. </li>
+                        </ul>
+                <% end %>
 
-
-  <% if user_signed_in? %>
-    <% if current_user.id == @user.id  %>
-        <button type="button" name="button"><%= link_to 'user parmetter', edit_user_registration_path(:id) %></button>
-          <h3><%= link_to "BOITES DE MESSAGES",conversations_path %></h3>
-    <% end %>
- <% end %>
-
-<% @user.startups.each do |startup| %>
-    <% if user_signed_in? %>
-       <% unless current_user.id == startup.user_id  %>
-          <p><%= render 'follow_form', user: @user %></p>
-       <% end %>
-    <% end %>
-    <h3> Visitez ma startup</h3>
-        <span><%= image_tag startup.logo.url,style: 'height:10%;width:10%;'%></span>
-        <span><%= link_to "visiter  #{startup.name}",startup %></span>
-        <span>(<%= startup.favorites.count %>) <img src="/etoile.png" alt="contributeur (s)" width="25" height="25"><br>
-        <ol>
-       <% unless user_signed_in? %>
-           <li>
-          <%= link_to "Inscrivez-vous", new_user_registration_path %> ou
-          <%= link_to "connectez-vous", new_user_session_path %>
-      <% end %>
-            </li>
-           <li>Vous pouvez m'encourager en laissant un commentaire positif sur la page de ma startup.</li>
-           <li>Vous pouvez également contribuer à promouvoir ma startup en cliquant sur le bouton promouvoir. </li>
-        </ol>
-<% end %>
-<div class="jumbotron">
-  <strong><%= link_to "MON RESEAU",relationship_path(@user.id) %></strong>
-  <ul>
-    <li><strong> <%= @user.following.count %> startup (s) affilié(s)</strong>:</li>
-  </ul>
-</div>
-<br>
-<div class="">
-    <button type="button" name="button"><%= link_to 'add startup', new_startup_path %></button>
-</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

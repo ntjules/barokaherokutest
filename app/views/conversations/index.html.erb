@@ -1,12 +1,17 @@
+<img src="/banner.gif" class="img-fluid" alt="bishop banner">
 <table class="table table-hover">
   <thead>
-    <h2>Message List</h2>
+    <div class="text-center">
+        <h3>MESSAGE LIST</h3>
+    </div>
+
   </thead>
   <tbody>
     <% @conversations.each do |conversation| %>
       <tr>
         <% if conversation.target_user(current_user).present? %>
-        <td><%= link_to conversation.target_user(current_user).name, conversation_messages_path(conversation)%> </td>
+        <td><%= image_tag conversation.target_user(current_user).avatar_thumbnail,style: 'height:50px;width:50px;' %>
+          <%= link_to conversation.target_user(current_user).name, conversation_messages_path(conversation)%> </td>
         <% end %>
       </tr>
     <% end %>

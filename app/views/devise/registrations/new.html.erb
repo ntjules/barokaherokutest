@@ -1,29 +1,27 @@
-<h2>Sign up</h2>
+
+<div class="offset-3 col-sm-6">
+  <div class="text-center">
+    <h2> SIGN UP</h2>
+      Well done ! you made the right decision.
+      this is the first step to your success.
+      Bishop is there to help you develop your startup's network..
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%if resource.avatar.attached?%>
-      <%=image_tag(resource.avatar)  %>
-    <% else %>
-      <%=image_tag("/default-avatar.jpg") %>
-    <% end %>
-  </div>
-  <div class="field">
-      <%= f.file_field :avatar, autofocus: true, autocomplete: "avatar" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :name %><br />
+  <div id="login" class="fadeIn first" name="login" placeholder="name">
+    <%= f.label :name %>
     <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
   </div>
-  <div class="field">
+  <div id="login" class="fadeIn second" name="login" placeholder="login">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.text_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
-  <div class="field">
+  <div id="login" class="fadeIn third" name="login" placeholder="password">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
@@ -31,14 +29,23 @@
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
-  <div class="field">
+  <div class="id="password" class="fadeIn fourth" name="login" placeholder="password confirmation">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="fadeIn fourth" value="Log In">
+    <%= f.submit "Sign up",class:"btn btn-sm btn-info" %>
   </div>
+  <div class="file-path-wrapper">
+    <%= f.label :avatar %><br />
+    <%= f.file_field :avatar, autofocus: true, autocomplete: "avatar",class:"btn btn-sm btn-light" %>
+</div>
 <% end %>
-
-<p> <%= render "devise/shared/links" %> </p>
+<div id="formFooter">
+  <%= render "devise/shared/links" %>
+</div>
+</div>
+</div>
+  </div>
+</div>

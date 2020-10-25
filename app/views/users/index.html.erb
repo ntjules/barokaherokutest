@@ -1,32 +1,35 @@
-<h2>All User</h2>
 
-<div class="jumbotron">
-    <% @users.each do |user| %>
-  <p>
-      <span> <%= image_tag (user.avatar_thumbnail), style: 'height:30px;width:30px;'%> </span>
-      <strong><%= user.name %></strong><br>
-      <button type="button" name="button"> <%= link_to "show_profile", user %></button><br>
-      <span> <%= user.email %> </span><br>
-      <ul>
-        <span> RESEAU de <%= user.name %></span>
-        <li><strong><%= user.following.count %> startup(s) affilié(s)</strong>:</li>
-        <% if user_signed_in?%>
-          <% unless current_user.id == user.id  %>
-              <li> <%= render 'follow_form', user: user %></li>
-            <% end %>
-          <% end %>
-      </ul>
-      <ul>
-         <% user.startups.each do |startup| %>
-            <span> STARTUP PUBLIE :</span>
-             <li> <span><%= image_tag startup.logo.url,style: 'height:10%;width:10%;'%></span>
-             <span><%= link_to "#{startup.name}",startup  %></span></li>
-         <% end %>
-      </ul>
+<img src="/banner.gif" class="img-fluid" alt="bishop banner">
+
+<hr>
+<% @users.each do |user| %>
+<div class="row">
+  <div class="col-sm-4">
+    <div class="container">
+      <%= image_tag (user.avatar_thumbnail), style: 'height:30px;width:30px;'%>
+      <%= link_to "#{user.name}", user %>
+     <p><%= user.email %></p>
       <% if user_signed_in?%>
-        <button type="button" name="button"><%= link_to "Envoyer un message à #{user.name}", conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post %>
+        <%= link_to "send message", conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post,class:"btn btn-sm btn-info" %>
       <% end %>
-      </button>
-     </p>
-    <% end %>
+    </div>
+  </div>
+  <div class="col-sm-8">
+    <div class="container">
+     <% user.startups.each do |startup| %>
+      <%= image_tag startup.logo.url,style: 'height:30%;width:30%;'%>
+      <%= link_to "#{startup.name}",startup  %> :
+      <%= startup.favorites.count %> <span><img src="/etoile.png" alt="contributeur (s)" width="25" height="25"></span>
+      <hr>
+      <p> <%= user.following.count %> affiliate startup</p>
+      <% if user_signed_in?%>
+        <% unless current_user.id == user.id  %>
+            <p><%= render 'follow_form', user: user %></p>
+          <% end %>
+        <% end %>
+     <% end %>
+    </div>
+  </div>
 </div>
+<hr>
+<% end %>
