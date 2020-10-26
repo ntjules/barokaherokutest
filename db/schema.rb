@@ -10,120 +10,119 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_23_132638) do
-
+ActiveRecord::Schema.define(version: 20_201_023_132_638) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "active_storage_attachments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
-    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  create_table 'active_storage_attachments', force: :cascade do |t|
+    t.string 'name', null: false
+    t.string 'record_type', null: false
+    t.bigint 'record_id', null: false
+    t.bigint 'blob_id', null: false
+    t.datetime 'created_at', null: false
+    t.index ['blob_id'], name: 'index_active_storage_attachments_on_blob_id'
+    t.index %w[record_type record_id name blob_id], name: 'index_active_storage_attachments_uniqueness', unique: true
   end
 
-  create_table "active_storage_blobs", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
-    t.text "metadata"
-    t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
-    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  create_table 'active_storage_blobs', force: :cascade do |t|
+    t.string 'key', null: false
+    t.string 'filename', null: false
+    t.string 'content_type'
+    t.text 'metadata'
+    t.bigint 'byte_size', null: false
+    t.string 'checksum', null: false
+    t.datetime 'created_at', null: false
+    t.index ['key'], name: 'index_active_storage_blobs_on_key', unique: true
   end
 
-  create_table "comments", force: :cascade do |t|
-    t.bigint "startup_id", null: false
-    t.bigint "user_id", null: false
-    t.text "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["startup_id"], name: "index_comments_on_startup_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
+  create_table 'comments', force: :cascade do |t|
+    t.bigint 'startup_id', null: false
+    t.bigint 'user_id', null: false
+    t.text 'content'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['startup_id'], name: 'index_comments_on_startup_id'
+    t.index ['user_id'], name: 'index_comments_on_user_id'
   end
 
-  create_table "conversations", force: :cascade do |t|
-    t.integer "sender_id"
-    t.integer "recipient_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["recipient_id"], name: "index_conversations_on_recipient_id"
-    t.index ["sender_id", "recipient_id"], name: "index_conversations_on_sender_id_and_recipient_id", unique: true
-    t.index ["sender_id"], name: "index_conversations_on_sender_id"
+  create_table 'conversations', force: :cascade do |t|
+    t.integer 'sender_id'
+    t.integer 'recipient_id'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['recipient_id'], name: 'index_conversations_on_recipient_id'
+    t.index %w[sender_id recipient_id], name: 'index_conversations_on_sender_id_and_recipient_id', unique: true
+    t.index ['sender_id'], name: 'index_conversations_on_sender_id'
   end
 
-  create_table "favorites", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "startup_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'favorites', force: :cascade do |t|
+    t.integer 'user_id'
+    t.integer 'startup_id'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "messages", force: :cascade do |t|
-    t.text "body"
-    t.bigint "conversation_id", null: false
-    t.bigint "user_id", null: false
-    t.boolean "read"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
-    t.index ["user_id"], name: "index_messages_on_user_id"
+  create_table 'messages', force: :cascade do |t|
+    t.text 'body'
+    t.bigint 'conversation_id', null: false
+    t.bigint 'user_id', null: false
+    t.boolean 'read'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['conversation_id'], name: 'index_messages_on_conversation_id'
+    t.index ['user_id'], name: 'index_messages_on_user_id'
   end
 
-  create_table "relationships", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "followed_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["followed_id"], name: "index_relationships_on_followed_id"
-    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
-    t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  create_table 'relationships', force: :cascade do |t|
+    t.integer 'follower_id'
+    t.integer 'followed_id'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['followed_id'], name: 'index_relationships_on_followed_id'
+    t.index %w[follower_id followed_id], name: 'index_relationships_on_follower_id_and_followed_id', unique: true
+    t.index ['follower_id'], name: 'index_relationships_on_follower_id'
   end
 
-  create_table "startups", force: :cascade do |t|
-    t.string "name"
-    t.text "resume"
-    t.text "contact"
-    t.text "decription_video"
-    t.integer "trade_registre"
-    t.text "banner"
-    t.text "logo"
-    t.string "address"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_startups_on_user_id"
+  create_table 'startups', force: :cascade do |t|
+    t.string 'name'
+    t.text 'resume'
+    t.text 'contact'
+    t.text 'decription_video'
+    t.integer 'trade_registre'
+    t.text 'banner'
+    t.text 'logo'
+    t.string 'address'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.bigint 'user_id', null: false
+    t.index ['user_id'], name: 'index_startups_on_user_id'
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "name", default: "", null: false
-    t.string "email", default: "", null: false
-    t.string "provider", default: "", null: false
-    t.string "uid", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["uid", "provider"], name: "index_users_on_uid_and_provider"
+  create_table 'users', force: :cascade do |t|
+    t.string 'name', default: '', null: false
+    t.string 'email', default: '', null: false
+    t.string 'provider', default: '', null: false
+    t.string 'uid', default: '', null: false
+    t.string 'encrypted_password', default: '', null: false
+    t.string 'reset_password_token'
+    t.datetime 'reset_password_sent_at'
+    t.datetime 'remember_created_at'
+    t.string 'confirmation_token'
+    t.datetime 'confirmed_at'
+    t.datetime 'confirmation_sent_at'
+    t.string 'unconfirmed_email'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['confirmation_token'], name: 'index_users_on_confirmation_token', unique: true
+    t.index ['email'], name: 'index_users_on_email', unique: true
+    t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
+    t.index %w[uid provider], name: 'index_users_on_uid_and_provider'
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "comments", "startups"
-  add_foreign_key "comments", "users"
-  add_foreign_key "messages", "conversations"
-  add_foreign_key "messages", "users"
-  add_foreign_key "startups", "users"
+  add_foreign_key 'active_storage_attachments', 'active_storage_blobs', column: 'blob_id'
+  add_foreign_key 'comments', 'startups'
+  add_foreign_key 'comments', 'users'
+  add_foreign_key 'messages', 'conversations'
+  add_foreign_key 'messages', 'users'
+  add_foreign_key 'startups', 'users'
 end

@@ -14,7 +14,8 @@
   </div>
 
 <div class="field">
-  <%= form_with(model:@startup,local: true) do |form| %>
+
+<%= form_with(model:@startup,local: true) do |form| %>
       startup name<br>
       <%= form.text_field :name %><br>
       contact <br>
@@ -27,7 +28,7 @@
       <%= form.text_field :address %>
       <br>
       resume<br>
-      <small>Make a short description of your startup in 150 characters:
+      <small>Make a description of your startup in minimum 150 characters:
          remember to talk about the impact of your solution.</small>
       <%= form.text_area :resume, class:"form-control" %>
       <br>
@@ -36,7 +37,6 @@
         jpg format with a size of 330px *80 px.
         your logo is representing you. Take care of it !</small>
       <%= form.file_field :logo,class:"btn btn-sm btn-warning" %>
-      <%= form.hidden_field :logo_cache %>
       <br>
       description video <br>
       <small>It is always more impactful to present your
@@ -54,7 +54,7 @@
       <br>
       <br>
       <div class="actions">
-        <%= form.submit "create startup" ,class:"btn btn-sm btn-warning" %>
+        <%= form.submit "create startup" ,class:"btn btn-sm btn-info" %>
       </div>
   <% end %>
 </div>

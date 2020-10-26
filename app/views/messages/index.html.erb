@@ -4,7 +4,7 @@
   <% if @over_ten %>
     <%= link_to 'previous message', '?m=all' %>
   <% end %>
-  <div class="offset-3 col-sm-8">
+  <div class="offset-2 col-sm-8">
     <% @messages.each do |message| %>
       <% if message.body.present? %>
         <div class="item">
@@ -34,7 +34,9 @@
   </div>
   </div>
   <div class="row">
-    <div class="offset-3 col-sm-8">
+    <div class="offset-2 col-sm-8">
+      <small>chat with <%= link_to "@#{@conversation.target_user(current_user).name}", user_path(@conversation.target_user(current_user).id) %></small>
+
       <%= form_with(model: [@conversation, @message]) do |f| %>
         <div class="field">
           <%= f.text_area :body, class: "form-control" %>

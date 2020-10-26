@@ -1,27 +1,30 @@
 
-<div class="offset-3 col-sm-6">
-  <div class="text-center">
+  <div class=" container text-center">
     <h2> SIGN UP</h2>
       Well done ! you made the right decision.
       this is the first step to your success.
       Bishop is there to help you develop your startup's network..
-
-<div class="wrapper fadeInDown">
-  <div id="formContent">
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    </div>
+    <hr>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
+<div class="row">
+  <div class="container">
 
-  <div id="login" class="fadeIn first" name="login" placeholder="name">
-    <%= f.label :name %>
+  <div class="offset-">
+
+  </div>
+  <div>
+    name <br>
     <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
   </div>
-  <div id="login" class="fadeIn second" name="login" placeholder="login">
+  <br>
+  <div >
     <%= f.label :email %><br />
     <%= f.text_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
-  <div id="login" class="fadeIn third" name="login" placeholder="password">
+  <div >
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
@@ -29,15 +32,15 @@
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
-  <div class="id="password" class="fadeIn fourth" name="login" placeholder="password confirmation">
+  <div >
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <div class="fadeIn fourth" value="Log In">
+  <div >
     <%= f.submit "Sign up",class:"btn btn-sm btn-info" %>
   </div>
-  <div class="file-path-wrapper">
+  <div class="">
     <%= f.label :avatar %><br />
     <%= f.file_field :avatar, autofocus: true, autocomplete: "avatar",class:"btn btn-sm btn-light" %>
 </div>
@@ -46,6 +49,5 @@
   <%= render "devise/shared/links" %>
 </div>
 </div>
-</div>
+
   </div>
-</div>

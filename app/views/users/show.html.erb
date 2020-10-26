@@ -5,11 +5,12 @@
           <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-12 justify-content-sd-center ">
               <div class="container">
-                <p>
-                  <%= image_tag (@user.avatar_thumbnail), style: 'height:150px;width:150px;'%>
-                <p>
-                <p><strong>Name </strong>:<%= @user.name %></p>
-                <p><strong>Email </strong><%= @user.email %></p>
+                <%= image_tag (@user.avatar_thumbnail), style: 'height:150px;width:150px;'%>
+                <hr>
+                <strong>Name </strong>:<%= @user.name %>
+                <hr>
+                <strong>Email </strong><%= @user.email %>
+                <hr>
                 <% if user_signed_in? %>
                   <% if current_user.id == @user.id  %>
                       <%= link_to 'user parmetter', edit_user_registration_path(:id),class:"btn btn-sm btn-warning" %>
@@ -26,7 +27,7 @@
                        we encourage you to post it and build a network. <br>
                       <strong>With a good network you can turn a simple idea into a great business.</strong></p>
                       <hr>
-                      <small>This user don't post startup</small>
+                      <small>Any startup here!</small>
                       <% if user_signed_in? %>
                         <% if current_user.id == @user.id  %>
                           <%= link_to 'add startup', new_startup_path,class:"btn btn-sm btn-info" %>
@@ -40,7 +41,7 @@
                           <p><%= render 'follow_form', user: @user %></p>
                        <% end %>
                     <% end %>
-                    <p><%= image_tag startup.logo.url,style: 'height:30%;width:30%;'%>
+                    <p><%= image_tag startup.logo_thumbnail,style: 'height:30%;width:30%;'%>
                     <span><%= link_to "#{startup.name}",startup %></span>
                     <span>(<%= startup.favorites.count %>) <img src="/etoile.png" alt="contributeur (s)" width="25" height="25"><br>
                     </p>

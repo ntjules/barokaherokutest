@@ -44,8 +44,8 @@
               </ul>
             </div>
             <div class="col-sm-5 col-md-4 py-4">
-                  <% current_user.startups.each do |startup| %>
-                    <p><%= image_tag startup.logo.url,style: 'height:25%;width:25%;'%>
+                <% current_user.startups.each do |startup| %>
+                      <p><%= image_tag startup.logo_thumbnail,style: 'height:25%;width:25%;'%>
                       <%= link_to "#{startup.name}",startup,class:"text-dark"%>
                     </p>
                 <% end %>

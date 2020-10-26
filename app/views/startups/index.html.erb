@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="card mb-12 shadow-sm">
-            <%= image_tag startup.logo.url,class: "bd-placeholder-img card-img-top",style: 'width="100%"; height="225";'%>
+            <%= image_tag startup.logo_thumbnail,class: "bd-placeholder-img card-img-top",style: 'width="100%"; height="225";'%>
             <div class="card-body">
               <p class="card-text"><%= startup.resume %></p>
               <hr>
@@ -15,6 +15,7 @@
                   <%= link_to 'visit the stratup', startup,class:"btn btn-sm btn-primary" %>
                 </div>
                 <small class="text-muted"><strong><%=startup.favorites.count %></strong> <img src="/etoile.png" alt="contributeur (s)" width="25" height="25"></small>
+
               </div>
             </div>
           </div>

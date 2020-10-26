@@ -17,7 +17,7 @@
   <div class="col-sm-8">
     <div class="container">
      <% user.startups.each do |startup| %>
-      <%= image_tag startup.logo.url,style: 'height:30%;width:30%;'%>
+      <%= image_tag startup.logo_thumbnail,style: 'height:30%;width:30%;'%>
       <%= link_to "#{startup.name}",startup  %> :
       <%= startup.favorites.count %> <span><img src="/etoile.png" alt="contributeur (s)" width="25" height="25"></span>
       <hr>

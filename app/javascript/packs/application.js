@@ -46,4 +46,9 @@ $(document).ready(function() {
     setTimeout(function() {
     $('.flash').fadeOut('fast');
 }, 3000);
+
+$(".add").click(function(){
+    $(this).hide();
+  });
+
 });
