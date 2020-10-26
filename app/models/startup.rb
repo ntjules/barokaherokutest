@@ -15,6 +15,8 @@ class Startup < ApplicationRecord
   has_many :favorite_users, through: :favorites, source: :user
   has_many :comments, dependent: :destroy
 
+  scope :name_search,  -> (text_search) {where("name LIKE ?", "%#{text_serach}%")}
+
   def logo_thumbnail
     if logo.attached?
       logo.variant(resize: '330x80!').processed

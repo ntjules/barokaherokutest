@@ -1,7 +1,16 @@
 
 <img src="/banner.gif" class="img-fluid" alt="bishop banner">
-
 <hr>
+<div class="container">
+  <div class="search">
+  <%= form_with(url: users_path, method: :get, local: true) do |f| %>
+    <%= f.text_field :email%>
+    <%= f.submit'search',:class=>"btn btn-dark" %><br>
+  <% end %>
+  <small clase = "text-center">searche user by email [<%= link_to "clear serche", users_path %>]</small>
+</div>
+</div>
+
 <% @users.each do |user| %>
 <div class="row">
   <div class="col-sm-4">
@@ -33,3 +42,4 @@
 </div>
 <hr>
 <% end %>
+<%= paginate @users %>

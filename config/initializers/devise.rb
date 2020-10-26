@@ -27,6 +27,8 @@ Devise.setup do |config|
   config.mailer_sender = 'birotori@gmail.com'
   config.omniauth :google_oauth2, ENV['GOOGLE_APP_ID'], ENV['GOOGLE_APP_SECRET'], name: :google
   config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET']
+  config.omniauth :twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_CONSUMER_SECRET']
+
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 

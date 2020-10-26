@@ -33,7 +33,7 @@ class User < ApplicationRecord
 
   end
 
-  def self.find_for_facfebook(auth)
+  def self.find_for_facebook(auth)
   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
     user.email = auth.info.email
     user.password = Devise.friendly_token[0,20]
@@ -41,7 +41,6 @@ class User < ApplicationRecord
     user.avatar = auth.info.image # assuming the user model has an image
   end
 end
-
 
 
   def avatar_thumbnail

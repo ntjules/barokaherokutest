@@ -1,3 +1,13 @@
+<div class="container">
+  <div class="search">
+  <%= form_with(url: startups_path, method: :get, local: true) do |f| %>
+    <%= f.text_field :name %>
+    <%= f.submit'search',:class=>"btn btn-dark" %><br>
+  <% end %>
+  <small clase = "text-center">searche startup by name</small>
+</div>
+</div>
+
 <% @startups.each do |startup| %>
 <div class="album py-5 bg-light">
     <div class="container">
@@ -24,3 +34,7 @@
   </div>
 </div>
 <% end %>
+
+<div class="container">
+  <%= paginate @startups %>
+</div>

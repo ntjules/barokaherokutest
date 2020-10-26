@@ -6,8 +6,9 @@ class StartupsController < ApplicationController
   before_action :user_check, only: %i[edit destroy]
 
   def index
-    @startups = Startup.all
-    @user = User.all
+  @startups = Startup.all.page(params[:page]).per(2)
+  @startups = Startup.where(name:params[:name.downcase]).page(params[:page]).per(2) if  params[:name]
+  @user = User.all
   end
 
   def new
