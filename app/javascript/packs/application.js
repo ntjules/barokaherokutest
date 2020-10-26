@@ -26,6 +26,12 @@ require('jquery')
 
 $(document).ready(function() {
 	// jQuery code
+  $(".addpromote").click(function(){
+      $(this).hide();
+    });
+  $(".addfollow").click(function(){
+        $(this).hide();
+    });
 
 	///////////////// fixed menu on scroll for desctop
     if ($(window).width() > 780) {
@@ -46,9 +52,5 @@ $(document).ready(function() {
     setTimeout(function() {
     $('.flash').fadeOut('fast');
 }, 3000);
-
-$(".add").click(function(){
-    $(this).hide();
-  });
 
 });

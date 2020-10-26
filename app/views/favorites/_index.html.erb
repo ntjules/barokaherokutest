@@ -4,7 +4,7 @@
         <% if @favorite.present? %>
           <small class="badge badge-warning"> <em> You promoted this startup  </em></small>
         <% else %>
-          <%= link_to 'PROMOUVOIR', favorites_path(startup_id: @startup.id), method: :post ,class:"btn btn-sm btn-warning add" %>
+          <%= link_to 'PROMOUVOIR', favorites_path(startup_id: @startup.id), method: :post ,class:"btn btn-sm btn-warning addpromote" %>
         <% end %>
     <% end %>
   <% end %>
