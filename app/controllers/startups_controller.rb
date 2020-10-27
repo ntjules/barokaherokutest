@@ -1,17 +1,19 @@
 class StartupsController < ApplicationController
   require 'youtube_it'
-  before_action :authenticate_user!, only: %i[create edit update destroy]
+  before_action :authenticate_user!, only: %i[create new edit update destroy]
   before_action :set_startup, only: %i[show edit update destroy]
   before_action :login_check, only: %i[new edit destroy]
   before_action :user_check, only: %i[edit destroy]
+  before_action :startup_check, only: %i[new create]
 
   def index
-  @startups = Startup.all.page(params[:page]).per(2)
-  @startups = Startup.where(name:params[:name.downcase]).page(params[:page]).per(2) if  params[:name]
-  @user = User.all
+    @startups = Startup.all.page(params[:page]).per(10)
+    @startups = Startup.where(name: params[:name.downcase]).page(params[:page]).per(10) if params[:name]
+    @user = User.all
   end
 
   def new
+    @user = User.all
     @startup = Startup.new
   end
 
@@ -52,6 +54,8 @@ end
     redirect_to startups_path
   end
 
+  def terms; end
+
   private
 
   def startup_params
@@ -69,6 +73,10 @@ end
 
   def user_check
     redirect_to startups_path, notice: 'access deny' unless current_user.id == @startup.user_id
+  end
+
+  def startup_check
+    redirect_to startups_path, notice: 'you have a startup on Bishop' unless current_user.startups.empty?
   end
 
   def login_check

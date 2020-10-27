@@ -15,7 +15,7 @@ class Startup < ApplicationRecord
   has_many :favorite_users, through: :favorites, source: :user
   has_many :comments, dependent: :destroy
 
-  scope :name_search,  -> (text_search) {where("name LIKE ?", "%#{text_serach}%")}
+  scope :name_search, ->(_text_search) { where('name LIKE ?', "%#{text_serach}%") }
 
   def logo_thumbnail
     if logo.attached?
@@ -24,18 +24,20 @@ class Startup < ApplicationRecord
       '/default_logo.png'
     end
   end
+
   def banner_thumbnail
-    unless banner.present?
-      '/banner.gif'
-    else
+    if banner.present?
       banner
+    else
+      '/banner.gif'
     end
   end
+
   def description_thumbnail
-    unless decription_video.present?
-      '/video.mp4'
-    else
+    if decription_video.present?
       decription_video
+    else
+      '/video.mp4'
     end
   end
 end

@@ -9,12 +9,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to new_user_registration_url
     end
   end
+
   def facebook
     @user = User.find_for_facebook(request.env['omniauth.auth'])
 
     if @user.persisted?
       sign_in_and_redirect @user, event: :authentication
-      set_flash_message(:notice, :success, kind: "Facebook") if is_navigational_format?
+      set_flash_message(:notice, :success, kind: 'Facebook') if is_navigational_format?
     else
       session['devise.facebook_data'] = request.env['omniauth.auth']
       redirect_to new_user_registration_url
@@ -24,7 +25,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   protected
 
   def update_resource(resource, params)
-   return super if params["password"]&.present?
-   resource.update_without_password(params.except("current_password"))
+    return super if params['password']&.present?
+
+    resource.update_without_password(params.except('current_password'))
  end
 end

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.order(:name).page(params[:page]).per(10)
-    @users = User.where(email:params[:email]).page(params[:page]).per(10) if  params[:email]
+    @users = User.where(email: params[:email]).page(params[:page]).per(10) if params[:email]
   end
 
   def show

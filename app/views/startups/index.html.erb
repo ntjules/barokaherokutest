@@ -2,12 +2,13 @@
   <div class="search">
   <%= form_with(url: startups_path, method: :get, local: true) do |f| %>
     <%= f.text_field :name %>
-    <%= f.submit'search',:class=>"btn btn-dark" %><br>
+    <%= f.submit'search', class:"btn btn-dark", placeholder:"Seache by start"%><br>
   <% end %>
-  <small clase = "text-center">searche startup by name</small>
+  <div class="text-center">
+    <small>searche startup by name</small>
+  </div>
 </div>
 </div>
-
 <% @startups.each do |startup| %>
 <div class="album py-5 bg-light">
     <div class="container">

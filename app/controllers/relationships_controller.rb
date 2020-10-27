@@ -15,7 +15,6 @@ class RelationshipsController < ApplicationController
       current_user.follow!(@user)
     end
     FollowMailer.follow_mail(@user).deliver
-    
   end
 
   def destroy

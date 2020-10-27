@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable,
          :omniauthable, omniauth_providers: %i[google facebook]
-  validates :name,  presence: true, length: { maximum: 30 }
+  validates :name, presence: true, length: { maximum: 30 }
 
   has_one_attached :avatar
   has_many :startups, dependent: :destroy
@@ -27,21 +27,19 @@ class User < ApplicationRecord
                       name: auth.info.name,
                       provider: auth.provider,
                       uid: auth.uid,
-                      password: Devise.friendly_token[0,20])
+                      password: Devise.friendly_token[0, 20])
     user.save
     user
-
   end
 
   def self.find_for_facebook(auth)
-  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-    user.email = auth.info.email
-    user.password = Devise.friendly_token[0,20]
-    user.name = auth.info.name   # assuming the user model has a name
-    user.avatar = auth.info.image # assuming the user model has an image
-  end
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
+      user.name = auth.info.name # assuming the user model has a name
+      user.avatar = auth.info.image # assuming the user model has an image
+    end
 end
-
 
   def avatar_thumbnail
     if avatar.attached?
