@@ -1,5 +1,4 @@
 class StartupsController < ApplicationController
-  require 'youtube_it'
   before_action :authenticate_user!, only: %i[create new edit update destroy]
   before_action :set_startup, only: %i[show edit update destroy]
   before_action :login_check, only: %i[new edit destroy]
@@ -60,7 +59,7 @@ end
 
   def startup_params
     params.require(:startup).permit(:name, :resume, :contact,
-                                    :decription_video, :decription_video_cache,
+                                    :decription_video,
                                     :trade_registre,
                                     :address,
                                     :banner, :banner_cache,
