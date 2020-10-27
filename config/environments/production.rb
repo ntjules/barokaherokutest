@@ -1,3 +1,4 @@
+require 'devise'
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -42,7 +43,7 @@ Rails.application.configure do
     address: 'smtp.gmail.com',
     port: 587,
     user_name: 'birotori@gmail.com',
-    password: 'rikaelbiz',
+    password: ENV['GOOGLE_PWD'],
     authentication: 'plain',
     enable_starttls_auto: true
   }
