@@ -1,3 +1,4 @@
+
 class RelationshipsController < ApplicationController
   def show
     @user = User.find(params[:id])
@@ -14,7 +15,7 @@ class RelationshipsController < ApplicationController
       @user = User.find(params[:relationship][:followed_id])
       current_user.follow!(@user)
     end
-    FollowMailer.follow_mail(@user).deliver
+    # FollowMailer.follow_mail(@user).deliver
   end
 
   def destroy
